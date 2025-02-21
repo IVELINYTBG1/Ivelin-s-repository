@@ -5,21 +5,54 @@
         static void Main(string[] args)
         {
             Random random = new Random();
-            int RandomNum = random.Next(1, 100); 
-            int UserGuess = int.Parse(Console.ReadLine());
-            if (UserGuess == RandomNum)
+            int RandomNum = random.Next(1, 100);
+            int UserGuess = 0;
+            bool isValidInput = false;
+
+            while (UserGuess != RandomNum)
             {
-                Console.WriteLine("You guessed the right number!");
+                Console.Write("Enter your guess: ");
+                string input = Console.ReadLine();
+                isValidInput = int.TryParse(input, out UserGuess);
+
+                if (!isValidInput)
+                {
+                    Console.WriteLine("Please enter a valid number.");
+                    continue;
+                }
+
+                if (UserGuess == RandomNum)
+                {
+                    Console.WriteLine("You are correct");
+                }
+                else if (UserGuess < RandomNum)
+                {
+                    Console.WriteLine("You are wrong");
+                    GiveHint(RandomNum);
+                    Console.WriteLine("The number is greater than your guess");
+                }
+                else
+                {
+                    Console.WriteLine("You are wrong");
+                    GiveHint(RandomNum);
+                    Console.WriteLine("The number is less than your guess");
+                }
+                
             }
-            else if (UserGuess < RandomNum)
+
+            Console.WriteLine("Press Enter to exit...");
+            Console.ReadLine();
+        }
+
+        static void GiveHint(int randomNum)
+        {
+            if (randomNum % 2 == 0)
             {
-                while (UserGuess < RandomNum)
-                    Console.WriteLine("aim lower");
+                Console.WriteLine("The number is even");
             }
             else
             {
-                while (UserGuess > RandomNum)
-                    Console.WriteLine("aim hier");
+                Console.WriteLine("The number is odd");
             }
         }
     }
