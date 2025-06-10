@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             Random random = new Random();
-            int RandomNum = random.Next(1, 100);
+            int RandomNum = random.Next(int.MinValue, int.MaxValue);
             int UserGuess = 0;
             bool isValidInput = false;
 
@@ -41,7 +41,6 @@
             }
 
             Console.WriteLine("Press Enter to exit...");
-            Console.ReadLine();
         }
 
         static void GiveHint(int randomNum)
